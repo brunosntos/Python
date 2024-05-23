@@ -48,6 +48,7 @@ def livroDisponiveis():
 
     for i in range(len(df)):
         if df.iloc[i]['status'] == 0:
-            print(f"Título: {df.iloc[i]['titulo']}, Autor: {df.iloc[i]['autor']}, Ano: {df.iloc[i]['ano']}\n")
+            print(f"Título: {df.iloc[i]['titulo']}, Autor: {df.iloc[i]['autor']}, Ano: {df.iloc[i]['ano']}")
 
+addLivro()
 livroDisponiveis()
