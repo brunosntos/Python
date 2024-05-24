@@ -25,6 +25,9 @@ elif not os.path.exists(arquivoTemp):
 if arquivosExists != 0:
     sys.exit('Programa encerrado por falta de arquivos.\n\n')
 
+resetCor = '\033[0m'
+ciano = '\033[96m'
+
 def menu():
     print('menu')
 
@@ -39,7 +42,7 @@ def addLivro():
         livros.seek(0,2)
         if livros.tell() == 0:
             livros.write('titulo,autor,ano,status\n')
-        livros.write(f'{titulo},{autor},{ano},0\n')
+        livros.write(f'{titulo},{autor},{ano},default\n')
     
     if input('\nAdicionar mais um livro? (S / N) -> ').lower() == 's':
         addLivro()
@@ -53,7 +56,7 @@ def livroDisponiveis():
     df = pd.read_csv(arquivoLivros)
 
     for i in range(len(df)):
-        if df.iloc[i]['status'] == 0:
+        if df.iloc[i]['status'] == 'default':
             print(f"Título: {df.iloc[i]['titulo']}, Autor: {df.iloc[i]['autor']}, Ano: {df.iloc[i]['ano']}")
     
     input('\nPressione [ENTER] parar voltar ao menu. ')
@@ -84,20 +87,26 @@ def emprestarLivro():
     dfusuarios = pd.read_csv(arquivoUsuarios)
 
     for i in range(len(dflivros)):
-        if dflivros.iloc[i]['status'] == 0:
-            print(f"{i+1}. {dflivros.iloc[i]['titulo']}")
+        if dflivros.iloc[i]['status'] == 'default':
+            print(f"{i}. {dflivros.iloc[i]['titulo']}")
+        else:
+            print(ciano + f"{i}. {dflivros.iloc[i]['titulo']}" + resetCor)
 
     indiceLivro = int(input('\nDigite o índice do livro que você deseja emprestar: '))
 
+    limpar()
+    print(f'{separador(10)} Emprestando um Livro {separador(10)}\n')
     for i in range(len(dfusuarios)):
-        print(f"{i+1}. Usuário: {dfusuarios.iloc[i]['nome']}")
+        print(f"{i}. {dfusuarios.iloc[i]['nome']}")
 
     indiceUsuario = int(input('\nAgora, digite o índice do usuário que você deseja emprestar: '))
 
-    
-
-
-
+    with open(arquivoTemp, 'w') as temp:
+        temp.write('titulo,autor,ano,status\n')
+    with open(arquivoTemp, 'a') as temp:
+        for i in range(len(dflivros)):
+            if dflivros.index(i) == indiceLivro:
+                temp.write(f'{dflivros.iloc[i]['']}')
 
 #addLivro()
 #livroDisponiveis()
