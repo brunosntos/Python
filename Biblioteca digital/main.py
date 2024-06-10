@@ -1,7 +1,16 @@
+'''
+adicionar opcoes:
+exibir todos os livros
+exibir todos os usuarios
+excluir um livro
+excluir um usuario
+'''
+
+
 import os
 import sys
-from time import sleep
 import pandas as pd
+from time import sleep
 
 def limpar():
     os.system('clear')
@@ -149,7 +158,7 @@ def emprestarLivro():
             with open(arquivoLivros, 'a') as livros:
                 livros.write(f"{titulo},{autor},{ano},{status}\n")
 
-    print(f'\nO livro foi emprestado à um usuário!')
+    print(f'\nO livro foi emprestado ao usuário!')
 
     input('\nPressione [ENTER] para voltar ao menu')
     menu()
