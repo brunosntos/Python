@@ -1,12 +1,3 @@
-'''
-adicionar opcoes:
-exibir todos os livros
-exibir todos os usuarios
-excluir um livro
-excluir um usuario
-'''
-
-
 import os
 import sys
 import pandas as pd

@@ -1,0 +1,3 @@
+numeros = [-6, -12, 33, 56, -9, 21, 12, -11, -66, 34]
+for i in numeros: 
+    print(i) if i < 0 else ...
